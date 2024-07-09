@@ -52,9 +52,17 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id, TaskUpdateAction $taskUpdateAction)
     {
+        $task = $taskUpdateAction($id, $request);
+
+        if($task == null){
+            return response()->json([
+                'message' => 'There is no such task'
+            ]); 
+        }
+
         return response()->json([
             'message' => 'Task was updated successfully',
-            'data' => new TaskResource($taskUpdateAction($id, $request))
+            'data' => new TaskResource($task)
         ], 200);
     }
 

@@ -11,9 +11,7 @@ class TaskUpdateAction
         $task = Task::find($id);
 
         if($task == null){
-            return response()->json([
-                'message' => 'There is no such task'
-            ]); 
+            return null;
         }
 
         $request->validate([
